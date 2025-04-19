@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/science.dart';
-import 'package:news_app/sports.dart';
-import 'package:news_app/technology.dart';
-import 'business.dart';
-import 'businessus.dart';
-import 'entertainment.dart';
-import 'general.dart';
-import 'health.dart';
+import 'CategoryTab.dart';
+
 
 class MyAApp extends StatelessWidget {
   const MyAApp({super.key});
@@ -14,7 +8,7 @@ class MyAApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MyHomePage(title: 'All News');
+    return  const MyHomePage(title: 'All News');
 
   }
 }
@@ -35,20 +29,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return DefaultTabController(
-      length: 8,
+      length: 7,
       child: Scaffold(
           appBar: AppBar(
-              bottom:TabBar(
+            leading: SizedBox(),
+              bottom:const TabBar(
                 isScrollable:true,
               tabs: [
-              const Tab(text: 'business',),
-              const Tab(text: 'business - US',),
-              const Tab(text: 'entertainment',),
-              const Tab(text: 'general',),
-              const Tab(text: 'health',),
-              const Tab(text: 'science',),
-              const Tab(text: 'sports',),
-              const Tab(text: 'technology',),
+              Tab(text: 'business',),
+              Tab(text: 'entertainment',),
+              Tab(text: 'general',),
+              Tab(text: 'health',),
+              Tab(text: 'science',),
+              Tab(text: 'sports',),
+              Tab(text: 'technology',),
 
             ]
        ),
@@ -60,14 +54,13 @@ class _MyHomePageState extends State<MyHomePage> {
           body: TabBarView(
               children:
               [
-                business(),
-                businessus(),
-                entertainment(),
-                general(),
-                health(),
-                science(),
-                sports(),
-                technology(),
+                CategoryTab(category: 'business',),
+                CategoryTab(category: 'entertainment',),
+                CategoryTab(category: 'general',),
+                CategoryTab(category: 'health',),
+                CategoryTab(category: 'science',),
+                CategoryTab(category: 'sports',),
+                CategoryTab(category: 'technology',),
               ]
           ),
 

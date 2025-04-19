@@ -18,7 +18,6 @@ class Spalshscreen extends StatefulWidget {
 class StartState extends State<StatefulWidget>{
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     StartTimer();
   }
@@ -28,7 +27,7 @@ class StartState extends State<StatefulWidget>{
     return Timer(duration, route);
   }
   route(){
-    Navigator.pushReplacement(context as BuildContext,
+    Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => MyAApp())
     );
   }
