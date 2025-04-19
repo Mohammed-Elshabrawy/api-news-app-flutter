@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'new.dart';
 
@@ -11,132 +10,111 @@ class Details extends StatelessWidget {
   var publishedAt;
   var urlToImage;
   Details(
-      {required this.author,
-      required this.title,
-      required this.url,
-      required this.publishedAt,
-      required this.urlToImage});
+      { this.author,
+       this.title,
+       this.url,
+       this.publishedAt,
+       this.urlToImage});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
+        appBar: AppBar(
+
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: const Text("Details",style: TextStyle(fontSize: 20,color: Colors.black),),
+          leading: IconButton(onPressed: (){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const MyAApp()));
+          }, icon: Icon(Icons.arrow_back_ios_outlined)),
+        ),
         body: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+
             children: [
-              Row(children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(context as BuildContext,
-                          MaterialPageRoute(builder: (context) => MyAApp()));
-                    },
-                    icon: Icon(Icons.arrow_back_ios_new_sharp)),
-                Text(
-                  " تفاصيل ",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                  ),
-                  textAlign: TextAlign.center,
-                )
-              ]),
               Center(
                 child: Container(
-                    height: 680,
-                    width: 300,
+
                     decoration: BoxDecoration(
                         color: Colors.cyan,
                         borderRadius: BorderRadius.circular(20)),
-                    child: urlToImage == null
-                        ?  Padding(
-                          padding: const EdgeInsets.fromLTRB(5, 200, 5, 0),
+                    child:   Padding(
+                          padding: const EdgeInsets.all(20),
                           child: Column(
+
                                 children: [
                                   Text(
-                                    "  المصدر : $author",
-                                    style: TextStyle(
-                                      fontSize: 20,
+
+                                    "$title read more",
+                                    style: const TextStyle(
+                                      fontSize: 18,
                                       color: Colors.white,
+
                                     ),
-                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.visible,
+
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Text(
-                                    "  العنوان : $title",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                    textAlign: TextAlign.center,
+                                  urlToImage == "none" ? const SizedBox():SizedBox(
+                                    width: double.infinity,
+                                    child: Image.network(urlToImage),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Text(
-                                    "no Picture",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                    textAlign: TextAlign.center,
+                                  Row(
+                                    children: [
+                                     
+                                      SizedBox(
+                                        width: 200,
+                                        child: Text(
+                                          "By $author",
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.white,
+                                          ),
+                                          textAlign: TextAlign.right,
+                                        ),
+                                      ),
+                                      TextButton(onPressed: () async{
+                                        if(url!="none"){
+                                          launchUrl(Uri.parse(url));
+                                          print(url);
+                                        }
+
+
+
+                                      }, child: Text("read more..",style: TextStyle(color: Colors.red),))
+                                    ],
                                   ),
-                                  Text(
-                                    "Date : $publishedAt",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                    textAlign: TextAlign.center,
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Spacer(),
+                                      Text(
+                                        "$publishedAt",
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.white,
+                                        ),
+                                        textAlign: TextAlign.right,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
                         )
 
-                        : Padding(
-                          padding: const EdgeInsets.fromLTRB(5, 100, 5, 0),
-                          child: Column(
-                                children: [
-                                  Text(
-                                    "  المصدر : $author",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "  العنوان : $title",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Container(
-                                    height: 200,
-                                    width: 200,
-                                    child: Image.network(urlToImage),
-                                  ),
-                                  Text(
-                                    "Date : $publishedAt",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                        ),
+
                 ),
               ),
             ],
