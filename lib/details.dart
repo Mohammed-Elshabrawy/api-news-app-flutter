@@ -1,61 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'new.dart';
 
 class Details extends StatelessWidget {
-  var  author;
-  var title;
-  var url;
-  var publishedAt;
-  var urlToImage;
-  Details(
-      { this.author,
-       this.title,
-       this.url,
-       this.publishedAt,
-       this.urlToImage});
+  final String  author;
+  final String title;
+  final String url;
+  final String publishedAt;
+  final String urlToImage;
+  const Details(
+      {super.key,  required this.author,
+       required this.title,
+       required this.url,
+       required this.publishedAt,
+       required this.urlToImage});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-
           backgroundColor: Colors.white,
           elevation: 0,
           title: const Text("Details",style: TextStyle(fontSize: 20,color: Colors.black),),
           leading: IconButton(onPressed: (){
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const MyAApp()));
-          }, icon: Icon(Icons.arrow_back_ios_outlined)),
+          }, icon: const Icon(Icons.arrow_back_ios_outlined)),
         ),
         body: SafeArea(
           child: Column(
-
             children: [
               Center(
                 child: Container(
-
                     decoration: BoxDecoration(
                         color: Colors.cyan,
                         borderRadius: BorderRadius.circular(20)),
                     child:   Padding(
                           padding: const EdgeInsets.all(20),
                           child: Column(
-
                                 children: [
                                   Text(
-
                                     "$title read more",
                                     style: const TextStyle(
                                       fontSize: 18,
                                       color: Colors.white,
-
                                     ),
                                     maxLines: 2,
                                     overflow: TextOverflow.visible,
-
                                   ),
                                   const SizedBox(
                                     height: 10,
@@ -69,7 +61,6 @@ class Details extends StatelessWidget {
                                   ),
                                   Row(
                                     children: [
-                                     
                                       SizedBox(
                                         width: 200,
                                         child: Text(
@@ -86,12 +77,8 @@ class Details extends StatelessWidget {
                                       TextButton(onPressed: () async{
                                         if(url!="none"){
                                           launchUrl(Uri.parse(url));
-                                          print(url);
                                         }
-
-
-
-                                      }, child: Text("read more..",style: TextStyle(color: Colors.red),))
+                                      }, child: const Text("read more..",style: TextStyle(color: Colors.red),))
                                     ],
                                   ),
                                   const SizedBox(
@@ -99,9 +86,9 @@ class Details extends StatelessWidget {
                                   ),
                                   Row(
                                     children: [
-                                      Spacer(),
+                                      const Spacer(),
                                       Text(
-                                        "$publishedAt",
+                                        publishedAt,
                                         style: const TextStyle(
                                           fontSize: 12,
                                           color: Colors.white,
@@ -113,8 +100,6 @@ class Details extends StatelessWidget {
                                 ],
                               ),
                         )
-
-
                 ),
               ),
             ],

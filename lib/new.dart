@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
-import 'CategoryTab.dart';
+import 'category_tab.dart';
 
 
 class MyAApp extends StatelessWidget {
   const MyAApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return  const MyHomePage(title: 'All News');
-
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
-
   final String title;
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -32,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
       length: 7,
       child: Scaffold(
           appBar: AppBar(
-            leading: SizedBox(),
+            leading: const SizedBox(),
               bottom:const TabBar(
                 isScrollable:true,
               tabs: [
