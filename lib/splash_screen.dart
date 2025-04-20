@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'new.dart';
+import 'home_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,7 +23,7 @@ class StartState extends State<StatefulWidget>{
   }
   route(){
     Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => const MyAApp())
+        MaterialPageRoute(builder: (context) => const HomePage())
     );
   }
   @override

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'new.dart';
+import 'home_page.dart';
 
 class Details extends StatelessWidget {
-  final String  author;
+  final String author;
   final String title;
   final String url;
   final String publishedAt;
@@ -25,7 +25,7 @@ class Details extends StatelessWidget {
           title: const Text("Details",style: TextStyle(fontSize: 20,color: Colors.black),),
           leading: IconButton(onPressed: (){
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const MyAApp()));
+                MaterialPageRoute(builder: (context) => const HomePage()));
           }, icon: const Icon(Icons.arrow_back_ios_outlined)),
         ),
         body: SafeArea(
