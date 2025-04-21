@@ -6,49 +6,53 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
-    return  const MyHomePage(title: 'All News');
+    return  const MyHomePage();
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+  const MyHomePage({super.key,});
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>  with SingleTickerProviderStateMixin{
   String keyWord=" ";
+  int currentIndex=0;
+  late final _tabController = TabController(length: 8, vsync: this);
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 8,
-      child: Scaffold(
+    return  Scaffold(
           appBar: AppBar(
-            leading: const SizedBox(
-              width:0 ,
-            ),
             title: SizedBox(
-              width: 300,
+             // width: 300,
               child: SearchBar(
                 elevation: WidgetStateProperty.all(0),
                 leading: const Icon(Icons.search,),
                 hintText: "Search your news",
                 onChanged: (value){
+                  setState(() {
+                    _tabController.index=0;
+                  });
                   if(value.isEmpty){
+                    setState(() {
+                      keyWord = " ";
+                    });
                   }else{
                     setState(() {
                       keyWord = value;
-                      //print(keyWord);
                     });
-                   // print(value);
                   }
                 },
               ),
             ),
-            bottom:const TabBar(
+            bottom:TabBar(
+              labelColor: Colors.cyan,
+              padding: const EdgeInsets.all(0),
+              controller: _tabController,
                 isScrollable:true,
-              tabs: [
+              tabs: const [
               Tab(text: 'Search',),
               Tab(text: 'business',),
               Tab(text: 'entertainment',),
@@ -60,14 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ]
        ),
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            //title:
-
-
             ),
           body: TabBarView(
+            controller: _tabController,
               children:
               [
-                SearchScreen(keyWord: keyWord),
+                SearchScreen(keyWord: keyWord,),
                 const CategoryTab(category: 'business',),
                 const CategoryTab(category: 'entertainment',),
                 const CategoryTab(category: 'general',),
@@ -77,46 +79,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 const CategoryTab(category: 'technology',),
               ]
           ),
-      ),
     );
   }
 }
-/*void showAlertDialog(BuildContext context) {
-  CupertinoAlertDialog alert = CupertinoAlertDialog(
-    content: Container(
-      height: double.maxFinite,
-      width: double.maxFinite,
-      child: Column(mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-
-        Text(
-          "الرجاء اضاقة مركبة واحدة علي الاقل لمواصلة عملية الحجز",
-         // style: FontStyle.BlacksColore,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            height: 60,
-            width: 180,
-            child: OutlinedButton(
-                onPressed: () {
-
-                },
-               // style: ButtonsStyle.BlueButtonStyle,
-                child: const Text(
-                  "اضافة الان",
-                 // style: FontStyle.WhiteBColor,
-                )),
-          ),
-        )
-      ]),
-    ),
-  );
-
-  showDialog(
-      context: context,
-      builder: (BuildContext buildercontex) {
-        return alert;
-      });
-}*/
