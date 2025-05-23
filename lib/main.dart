@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/splash_screen.dart';
+import 'package:news_app/modules/splash_screen.dart';
 
 
 void main() {
@@ -14,8 +14,15 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            titleTextStyle: TextStyle(color: Colors.cyan),
+            color: Colors.deepPurple,
+          ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+      ),
+      darkTheme: ThemeData.dark(
+
       ),
       debugShowCheckedModeBanner: false,
      home:const SplashScreen() ,

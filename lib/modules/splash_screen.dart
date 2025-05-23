@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'home_page.dart';
+import '../layout/home_layout.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -33,7 +33,7 @@ class StartState extends State<StatefulWidget>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 200,),
-            Image.asset("lib/consts/—Pngtree—vector globe icon_3787753.png"),
+            Image.asset("lib/shared/consts/—Pngtree—vector globe icon_3787753.png"),
             const SizedBox(height: 20,),
             const Text("Welcome to My News App",style: TextStyle(fontSize: 20)),
             const SizedBox(height: 20,),

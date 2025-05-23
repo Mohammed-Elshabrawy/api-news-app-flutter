@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'Search_sreen.dart';
-import 'category_tab.dart';
+import '../modules/Search_screen.dart';
+import '../shared/components/category_tab.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

@@ -10,7 +10,6 @@ class SearchScreen extends StatelessWidget {
       var url = "https://newsapi.org/v2/everything?q=$keyWord&apiKey=3601c7b65bb54d3d913c49d936ae9928";
       var response = await http.get(Uri.parse(url));
       var responseBody = jsonDecode(response.body);
-      //print(responseBody);
       return responseBody;
     }
   @override
